@@ -3,7 +3,6 @@ package com.ibanheiz.expose;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -15,7 +14,6 @@ import com.ibanheiz.model.Cliente;
  * API de controle de Clientes
  * @author Nicolas IBanheiz
  */
-@ApplicationPath("/expose")
 @Path("/clientes")
 public class ClienteResource {
 
