@@ -1,18 +1,19 @@
 package com.ibanheiz.utils;
 
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-public class LoggerUtil {
-
+public class LoggerUtil implements Serializable {
+	private static final long serialVersionUID = -8233504751160790161L;
+	
 	private Logger logger;
 	
 	/**
 	 * @param classe Class utilizada pelo logger
 	 */
 	public LoggerUtil(Class<?> classe) {
-		Logger.getLogger(classe.getSimpleName());
+		logger = Logger.getLogger(classe.getSimpleName());
 	}
 	
 	/**
@@ -32,7 +33,7 @@ public class LoggerUtil {
 	 */
 	public void warnnig(String mensagem) {
 		logger.setLevel(Level.WARNING);
-		logger.info(mensagem);		
+		logger.warning(mensagem);		
 	}
 	
 	/**
@@ -42,6 +43,6 @@ public class LoggerUtil {
 	 */
 	public void error(String mensagem) {
 		logger.setLevel(Level.SEVERE);
-		logger.info(mensagem);		
+		logger.severe(mensagem);		
 	}
 }
