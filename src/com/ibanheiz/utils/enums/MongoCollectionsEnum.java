@@ -1,10 +1,10 @@
 package com.ibanheiz.utils.enums;
 
-public enum MongoCollections {
+public enum MongoCollectionsEnum {
 
 	CLIENTES("clientes");
 	
-	private MongoCollections(String name) {
+	private MongoCollectionsEnum(String name) {
 		this.name = name;
 	}
 

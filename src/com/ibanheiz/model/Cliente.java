@@ -1,33 +1,39 @@
 package com.ibanheiz.model;
 
-import java.util.List;
+import java.io.Serializable;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name = "Cliente", propOrder = { "_id", "razaoSocial", "nomeFantasia", "cnpj", "cpf", "telefones" })
-@XmlRootElement
-public class Cliente {
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 
-	private String _id;
+@XmlType(name = "Cliente", propOrder = { "id", "razaoSocial", "nomeFantasia", "cnpj", "cpf" })
+@XmlRootElement
+@Entity("clientes")
+public class Cliente implements Serializable {
+	private static final long serialVersionUID = 1163352535446803731L;
+
+	@Id
+	private ObjectId id;
 	private String razaoSocial;
 	private String nomeFantasia;
 	private String cnpj;
 	private String cpf;
-	private List<String> telefones;
 
 	/**
-	 * @return the _id
+	 * @return the id
 	 */
-	public String get_id() {
-		return _id;
+	public String getId() {
+		return id.toString();
 	}
 
 	/**
-	 * @param _id the _id to set
+	 * @param id the id to set
 	 */
-	public void set_id(String _id) {
-		this._id = _id;
+	public void setId(String id) {
+		this.id = new ObjectId(id);
 	}
 
 	/**
@@ -86,17 +92,4 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 
-	/**
-	 * @return the telefones
-	 */
-	public List<String> getTelefones() {
-		return telefones;
-	}
-
-	/**
-	 * @param telefones the telefones to set
-	 */
-	public void setTelefones(List<String> telefones) {
-		this.telefones = telefones;
-	}
 }

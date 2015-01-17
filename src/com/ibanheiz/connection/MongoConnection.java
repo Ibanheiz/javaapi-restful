@@ -2,59 +2,36 @@ package com.ibanheiz.connection;
 
 import java.net.UnknownHostException;
 
-import javax.inject.Inject;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
 
-import com.ibanheiz.utils.LoggerUtil;
-import com.ibanheiz.utils.enums.MongoCollections;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 
 public class MongoConnection {
 
-	@Inject
-	private LoggerUtil loggerUtil;
-
 	private MongoClient mongo;
 	
+	private Morphia morphia;
+
+	private static final String DATABASE = "javaapi";
+
 	/**
-	 * Conectar com o MongoDb
-	 * @author Nicolas Ibanheiz
+	 * @return the mongoClient
 	 */
-	public void connect() {
+	public MongoClient getMongo() {
 		try {
 			mongo = new MongoClient("localhost", 27017);
-			loggerUtil.info("Abrindo conexão com o MongoDb");
 		} catch (UnknownHostException e) {
-			loggerUtil.error("Erro ao conectar com o MongoDb");
 			e.printStackTrace();
 		}
+		return mongo;
 	}
 
 	/**
-	 * Fecha conexão com o MongoDb
-	 * @author Nicolas Ibanheiz
+	 * @return DataStore criada
 	 */
-	public void close() {
-		if (mongo != null) {
-			mongo.close();
-			loggerUtil.info("Fechando conexão com o MongoDb");
-		}
-	}
-	
-	/**
-	 * @author Nicolas Ibanheiz
-	 * @return Objeto DB do mongo com conexão da base 'javaapi'
-	 */
-	public DB getJavaApiDatabase() {
-		return mongo.getDB("javaapi");
-	}
-
-	/**
-	 * @author Nicolas Ibanheiz
-	 * @return Nome da coleção de clientes
-	 */
-	public DBCollection getClientesCollection() {
-		return getJavaApiDatabase().getCollection(MongoCollections.CLIENTES.getName());
+	public Datastore getDataStore() {
+		morphia = new Morphia();
+		return morphia.createDatastore(getMongo(), DATABASE);
 	}
 }
