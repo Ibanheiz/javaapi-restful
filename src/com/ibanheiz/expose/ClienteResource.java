@@ -23,8 +23,6 @@ import com.ibanheiz.utils.LoggerUtil;
  * @author Nicolas IBanheiz
  */
 @Path("/clientes")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped
 public class ClienteResource implements Serializable {
 	private static final long serialVersionUID = 9035620292826255422L;
@@ -41,12 +39,15 @@ public class ClienteResource implements Serializable {
 	 * @throws IOException
 	 */
 	@GET
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<Cliente> buscar(){
 		logger.info("Consumindo Web Service de consulta de Clientes");
 		return clienteDAO.buscarTodos();
 	}
 
 	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response cadastrar(Cliente cliente) {
 		logger.info("Consumindo Web Service de cadastro de Clientes");
 		clienteDAO.salvar(cliente);
