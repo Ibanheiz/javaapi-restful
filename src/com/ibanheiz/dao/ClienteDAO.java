@@ -23,8 +23,8 @@ public class ClienteDAO {
 	 * @param cliente
 	 */
 	public void salvar(Cliente cliente) {
-		datastore.save(cliente);
 		logger.info("Salvando Cliente: " + cliente.getRazaoSocial());
+		datastore.save(cliente);
 	}
 	
 	/**
@@ -32,8 +32,37 @@ public class ClienteDAO {
 	 * @author Nicolas Ibanheiz
 	 */
 	public List<Cliente> buscarTodos() {
-		Query<Cliente> query = datastore.find(Cliente.class);
 		logger.info("Buscando todos os Clientes");
+		Query<Cliente> query = datastore.find(Cliente.class);
 		return query.asList();
+	}
+	
+	/**
+	 * Utilizada o método save(T Entity) para alterar o objeto completo.
+	 * Lança Runtime Exception no caso de não encontrar o ID referenciado
+	 * @author Nicolas Ibanheiz
+	 * @param id do Cliente
+	 * @param cliente para ser alterado
+	 */
+	public void alterar(String id, Cliente cliente) {
+		try {
+			cliente.setId(id);
+			datastore.save(cliente);
+			logger.info("Alterando cliente de id: " + id);
+		} catch (RuntimeException e) {
+			logger.error("Provavel erro de ID ao alterar o Cliente:" + id + "\nErro: " + e.getMessage());
+		}
+	}
+	
+	/**
+	 * Remove o Cliente
+	 * @author Nicolas Ibanheiz
+	 * @param id do cliente a ser removido
+	 */
+	public void remover(String id) {
+		Cliente cliente = new Cliente();
+		cliente.setId(id);
+		datastore.delete(cliente);
+		logger.info("Removendo cliente de id: " + id);
 	}
 }
