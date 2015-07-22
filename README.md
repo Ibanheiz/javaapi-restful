@@ -1,4 +1,8 @@
 # JavaAPI-RESTfull
+==================
+
+API RESTfull em Java com JAX-RS e Jersey, consumido com AngularJS.
+
 
 Projeto com API RESTfull básica para manter módulo de Clientes, utilizando JAX-RS e a implementação de referência Jersey. A API salva os dados no banco de dados NoSql MongoDb, fazendo uso do framework Morphia para estabalecer relação entre os objetos Java com o Mongo. <br/>
 O AngularJS é responsável pelo consumo da API e apresentação dos dados. <br/>
