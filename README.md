@@ -1,6 +1,5 @@
 # JavaAPI-RESTfull
 ==================
-
 API RESTfull em Java com JAX-RS e Jersey, consumido com AngularJS.
 
 
