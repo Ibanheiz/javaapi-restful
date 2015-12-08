@@ -1,11 +1,106 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>API RESTfull</title>
-</head>
-<body>
-	<div style="width: 100px; height:100px; background: #000"></div>
+<!doctype html>
+<html lang="en" data-ng-app="appJava">
+<head data-ng-controller="headController">
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.brown-deep_orange.min.css">
+	<script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+	<script src="src/lib/application.js" type="text/javascript"></script>
+	<title data-ng-bind="titulo"></title>
 	
+	<style>
+		.card-cliente {
+			width: 80%;
+			margin: 5% auto;
+		}
+		
+		.table-clientes {
+			widows: 100%;
+		}
+		
+		.table-head th {
+			text-align: left;
+		}
+	</style>
+</head>
+<body data-ng-controller="appController">
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<header class="mdl-layout__header">
+			<div class="mdl-layout__header-row">
+				<span class="mdl-layout-title">{{name}}</span>
+				<div class="mdl-layout-spacer"></div>
+				<nav class="mdl-navigation mdl-layout--large-screen-only">
+					<a href="" class="mdl-navigation__link">Cliente</a>
+					<a href="" class="mdl-navigation__link">Serviço</a>
+					<a href="" class="mdl-navigation__link">Chat<span class="mdl-badge" data-badge="{{quantidadeMensagemNotificacao}}"></span></a>
+				</nav>
+			</div>
+		</header>
+		<div class="mdl-layout__drawer">
+			<span class="mdl-layout-title">{{name}}</span>
+			<nav class="mdl-navigation">
+				<a href="" class="mdl-navigation__link">Teste</a>
+				<a href="" class="mdl-navigation__link">Teste</a>
+				<a href="" class="mdl-navigation__link">Teste</a>
+				<a href="" class="mdl-navigation__link">Teste</a>
+				<a href="" class="mdl-navigation__link">Teste</a>
+				<a href="" class="mdl-navigation__link">Teste</a>
+				<a href="" class="mdl-navigation__link">Teste</a>
+			</nav>
+		</div>
+		<main class="mdl-layout__content">
+			<div class="page-content">
+				<div class="mdl-card card-cliente mdl-shadow--2dp">
+					<div class="mdl-card__title">
+						<h2 class="mdl-card__title-text">Cliente</h2>
+					</div>
+					<div class="mdl-card__supporting-text" data-ng-controller="listaController">
+						<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp table-clientes">
+							<thead>
+								<tr class="table-head">
+									<th>Nome</th>
+									<th>Idade</th>
+									<th>Email</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr data-ng-repeat="pessoa in pessoas">
+									<td>{{pessoa.nome}}</td>
+									<td>{{pessoa.idade}}</td>
+									<td>{{pessoa.email}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>	
+					<div class="mdl-card__actions mdl-card--border">
+						<div class="formulario-cadastro">
+							<div class="mdl-grid">
+								<div class="mdl-cell mdl-cell--4-col  mdl-textfield mdl-js-textfield">
+									<input id="pessoaNome" type="text" class="mdl-textfield__input" />
+									<label for="pessoaNome" class="mdl-textfield__label">Nome</label>
+								</div>
+								<div class="mdl-cell mdl-cell--4-col  mdl-textfield mdl-js-textfield">
+									<input id="pessoaIdade" type="text" class="mdl-textfield__input" pattern="[0-9]{2-3}"/>
+									<label for="pessoaIdade" class="mdl-textfield__label">Idade</label>
+								</div>						
+								<div class="mdl-cell mdl-cell--4-col  mdl-textfield mdl-js-textfield">
+									<input id="pessoaEmail" type="email" class="mdl-textfield__input" />
+									<label for="pessoaEmail" class="mdl-textfield__label">Email</label>
+								</div>									
+							</div>
+							
+							<div class="">
+								<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+									Salvar
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</main>
+	</div>
 </body>
 </html>
