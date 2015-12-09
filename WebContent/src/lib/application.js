@@ -1,4 +1,14 @@
-var app = angular.module('appJava', []);
+var app = angular.module('appJava', ['ngAnimate']);
+
+function _buscaClientes($scope, $http) {
+	var promisse = $http.get("http://localhost:8080/java-angular/api/clientes");
+	promisse.success(function (data) {
+		$scope.pessoas = data.cliente;
+	});
+	promisse.error(function (err) {
+		console.log(err);
+	});
+}
 
 angular.module('appJava').controller('headController', function($scope){
 	$scope.titulo = "Angular com Java";
@@ -10,19 +20,8 @@ app.controller('appController', function ($scope) {
 	$scope.quantidadeMensagemNotificacao = quantidadeMensagemNotificacao;
 });
 
-app.controller('listaController', function($scope) {
-	var pessoas = [];
-	pessoas.push({
-		nome: 'Joaquim Neto', 
-		sexo: 'M', 
-		idade: 21, 
-		email: 'hello@joaquimsn.com'
-	});
-	
-	pessoas.push(criarPessoa('José Carlos', 'M', 34, 'teste@example.com'));
-	pessoas.push(criarPessoa('Antonio Santos', 'M', 23, 'teste@teste.com'));
-	
-	$scope.pessoas = pessoas;
+app.controller('listaController', function($scope, $http) {
+	_buscaClientes($scope, $http);
 	
 	function criarPessoa(nome, sexo, idade, email) {
 		var pessoa = {};
@@ -33,4 +32,23 @@ app.controller('listaController', function($scope) {
 		
 		return pessoa;
 	};
+	
+	$scope.adicionarPessoa = function (pessoa) {
+		if (pessoa) {
+			$http.post("http://localhost:8080/java-angular/api/clientes", pessoa).then(function(response){
+				$scope.pessoas.push(pessoa);
+				delete $scope.pessoa;
+				console.log(response);
+			});
+		}
+	};
+	
+	$scope.selecionarPessoa = function(pessoa) {
+		$scope.pessoa = pessoa;
+	}
+	
+	$scope.excluirPessoa = function(index) {
+		console.log(index);
+		$scope.pessoas.splice(index, 1);
+	}
 });
