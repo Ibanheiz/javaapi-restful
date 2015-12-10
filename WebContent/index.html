@@ -81,7 +81,7 @@
 			<div class="page-content">
 				<div class="mdl-card card-cliente mdl-shadow--2dp" data-ng-controller="listaController">
 					<div class="mdl-card__title">
-						<h2 class="mdl-card__title-text">Cliente</h2>
+						<h2 class="mdl-card__title-text">Clientes</h2>
 					</div>
 					<div class="mdl-card__supporting-text card-table-lista">
 						<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp table-clientes">
@@ -94,10 +94,10 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr data-ng-repeat="pessoa in pessoas" data-ng-click="selecionarPessoa(pessoa)" class="table-row">
-									<td class="mdl-data-table__cell--non-numeric">{{pessoa.nome}}</td>
-									<td class="mdl-data-table__cell--non-numeric">{{pessoa.idade}}</td>
-									<td class="mdl-data-table__cell--non-numeric">{{pessoa.email}}</td>
+								<tr data-ng-repeat="cliente in clientes" data-ng-dblclick="selecionarPessoa(cliente)" class="table-row">
+									<td class="mdl-data-table__cell--non-numeric">{{cliente.nome}}</td>
+									<td class="mdl-data-table__cell--non-numeric">{{cliente.idade}}</td>
+									<td class="mdl-data-table__cell--non-numeric">{{cliente.email}}</td>
 									<td><a href="" data-ng-click="excluirPessoa($index)"><i class="material-icons">clear</i></a></td>
 								</tr>
 							</tbody>
@@ -107,27 +107,29 @@
 						<div class="formulario-cadastro">
 							<div class="mdl-grid">
 								<div class="mdl-cell mdl-cell--4-col  mdl-textfield mdl-js-textfield">
-									<input id="pessoaNome" type="text" class="mdl-textfield__input" data-ng-model="pessoa.nome"/>
-									<label for="pessoaNome" class="mdl-textfield__label">Nome</label>
+									<input id="clienteNome" type="text" class="mdl-textfield__input" data-ng-model="cliente.nome"/>
+									<label for="clienteNome" class="mdl-textfield__label">Nome</label>
 								</div>
 								<div class="mdl-cell mdl-cell--4-col  mdl-textfield mdl-js-textfield">
-									<input id="pessoaIdade" type="text" class="mdl-textfield__input" pattern="[0-9]{2,3}" data-ng-model="pessoa.idade"/>
-									<label for="pessoaIdade" class="mdl-textfield__label">Idade</label>
+									<input id="clienteIdade" type="text" class="mdl-textfield__input" pattern="[0-9]{2,3}" data-ng-model="cliente.idade"/>
+									<label for="clienteIdade" class="mdl-textfield__label">Idade</label>
 								</div>						
 								<div class="mdl-cell mdl-cell--4-col  mdl-textfield mdl-js-textfield">
-									<input id="pessoaEmail" type="email" class="mdl-textfield__input" data-ng-model="pessoa.email" />
-									<label for="pessoaEmail" class="mdl-textfield__label">Email</label>
+									<input id="clienteEmail" type="email" class="mdl-textfield__input" data-ng-model="cliente.email" />
+									<label for="clienteEmail" class="mdl-textfield__label">Email</label>
 								</div>									
 							</div>
 							
 							<div class="panel-buttons-controller">
-								<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" data-ng-click="adicionarPessoa(pessoa)">
+								<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" data-ng-click="adicionarCliente(cliente)"
+									data-ng-show="!cliente.id">
 									Salvar
 								</button>
-								<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" data-ng-click="alterarPessoa(pessoa)">
+								<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" data-ng-click="alterarCliente(cliente)"
+									data-ng-show="cliente.id">
 									Alterar
 								</button>
-								<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+								<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" data-ng-click="cancelar()">
 									Cancelar
 								</button>
 							</div>

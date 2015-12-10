@@ -1,10 +1,24 @@
 var app = angular.module('appJava', ['ngAnimate']);
 
-function _buscaClientes($scope, $http) {
+function _buscarClientes($scope, $http) {
 	var promisse = $http.get("http://localhost:8080/java-angular/api/clientes");
 	promisse.success(function (data) {
-		$scope.pessoas = data.cliente;
+		console.log(data.cliente);
+		$scope.clientes = data.cliente;
 	});
+	promisse.error(function (err) {
+		console.log(err);
+	});
+}
+
+function _removerCliente(index, $scope, $http) {
+	var cliente = $scope.clientes[index];
+	var promisse = $http.delete("http://localhost:8080/java-angular/api/clientes/" + cliente.id);
+	
+	promisse.success(function (data){
+		$scope.clientes.splice(index, 1);
+	});
+	
 	promisse.error(function (err) {
 		console.log(err);
 	});
@@ -21,34 +35,47 @@ app.controller('appController', function ($scope) {
 });
 
 app.controller('listaController', function($scope, $http) {
-	_buscaClientes($scope, $http);
+	_buscarClientes($scope, $http);
 	
 	function criarPessoa(nome, sexo, idade, email) {
-		var pessoa = {};
-		pessoa.nome = nome;
-		pessoa.sexo = sexo;
-		pessoa.idade = idade;
-		pessoa.email = email;
+		var cliente = {};
+		cliente.nome = nome;
+		cliente.sexo = sexo;
+		cliente.idade = idade;
+		cliente.email = email;
 		
-		return pessoa;
+		return cliente;
 	};
 	
-	$scope.adicionarPessoa = function (pessoa) {
-		if (pessoa) {
-			$http.post("http://localhost:8080/java-angular/api/clientes", pessoa).then(function(response){
-				$scope.pessoas.push(pessoa);
-				delete $scope.pessoa;
+	$scope.adicionarCliente = function (cliente) {
+		if (cliente) {
+			$http.post("http://localhost:8080/java-angular/api/clientes", cliente).then(function(response){
+				$scope.clientes.push(cliente);
+				delete $scope.cliente;
 				console.log(response);
 			});
 		}
 	};
 	
-	$scope.selecionarPessoa = function(pessoa) {
-		$scope.pessoa = pessoa;
+	$scope.alterarCliente = function (cliente) {
+		if (cliente) {
+			$http.put("http://localhost:8080/java-angular/api/clientes/"+cliente.id, cliente).then(function(response){
+				$scope.clientes.push(cliente);
+				delete $scope.cliente;
+				alert("Cliente alterado com sucesso");
+			});
+		}
+	};
+	
+	$scope.cancelar = function() {
+		delete $scope.cliente;
+	}
+	
+	$scope.selecionarPessoa = function(cliente) {
+		$scope.cliente = cliente;
 	}
 	
 	$scope.excluirPessoa = function(index) {
-		console.log(index);
-		$scope.pessoas.splice(index, 1);
+		_removerCliente(index, $scope, $http);
 	}
 });
