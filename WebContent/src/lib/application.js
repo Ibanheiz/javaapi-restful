@@ -17,6 +17,7 @@ function _removerCliente(index, $scope, $http) {
 	
 	promisse.success(function (data){
 		$scope.clientes.splice(index, 1);
+		delete $scope.cliente;
 	});
 	
 	promisse.error(function (err) {
@@ -52,30 +53,36 @@ app.controller('listaController', function($scope, $http) {
 			$http.post("http://localhost:8080/java-angular/api/clientes", cliente).then(function(response){
 				$scope.clientes.push(cliente);
 				delete $scope.cliente;
-				console.log(response);
 			});
 		}
 	};
 	
 	$scope.alterarCliente = function (cliente) {
 		if (cliente) {
-			$http.put("http://localhost:8080/java-angular/api/clientes/"+cliente.id, cliente).then(function(response){
-				$scope.clientes.push(cliente);
+			$http.put("http://localhost:8080/java-angular/api/clientes/" + cliente.id, cliente).then(function(response) {
+				var clientes = $scope.clientes;
+				
+				for (var index = 0; index < clientes.length; index++) {
+					if (clientes[index].id === cliente.id) {
+						console.log("index " + index + " tamnaho array" + clientes.length);
+						clientes[index] = cliente;
+						continue;
+					}
+				}
 				delete $scope.cliente;
-				alert("Cliente alterado com sucesso");
 			});
 		}
 	};
 	
-	$scope.cancelar = function() {
+	$scope.cancelar = function () {
 		delete $scope.cliente;
 	}
 	
-	$scope.selecionarPessoa = function(cliente) {
-		$scope.cliente = cliente;
+	$scope.selecionarCliente = function (cliente) {
+		$scope.cliente = angular.copy(cliente);
 	}
 	
-	$scope.excluirPessoa = function(index) {
+	$scope.excluirCliente = function (index) {
 		_removerCliente(index, $scope, $http);
 	}
 });
