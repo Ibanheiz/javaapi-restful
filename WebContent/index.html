@@ -1,83 +1,29 @@
 <!doctype html>
 <html lang="en" data-ng-app="appJava">
-<head data-ng-controller="headController">
+<head>
 	<meta charset="UTF-8" />
 	<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.brown-deep_orange.min.css">
 	<script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-route.js"></script>
 	<script src="src/lib/application.js" type="text/javascript"></script>
+	<script src="src/modules/cliente/controllers/persistencia.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="src/resources/style.css"/>
 	<meta name="viewport" content="width=device-width initial-scale=1.0" />
-	<title data-ng-bind="titulo"></title>
-	
-	<style>
-		.accent-color {
-			color: #FF6E40;	
-		}
-		
-		.card-cliente {
-			width: 80%;
-			margin: 3% auto;
-		}
-		
-		.table-clientes {
-			width: 100%;
-		}
-		
-		.table-head th, .table-clientes tbody tr td {
-			text-align: left;
-		}
-		
-		.panel-buttons-controller {
-			box-sizing: border-boxing;
-			padding: 8px;
-		}
-		
-		.coluna-40 {
-			width: 40%;
-		}
-		
-		.coluna-20 {
-			width: 20%;
-		}
-		
-		.card-table-lista {
-			margin: 0 auto;
-		}
-		
-		.mdl-data-table tbody tr:hover {
-			background-color: #AB8D83;
-		}
-		
-		.row-color {
-			background-color: #EEE;
-		}
-		
-		.jsn-mdl-no-transition {
-			transition: none !important;
-		    transition-duration: none;
-		}
-		
-		.mdl-textfield__input:focus {
-			border-bottom: 1px solid;
-			border-color: rgb(130, 90, 76);
-			outline: 0;
-		    transition: border 300ms;
-	        transition-timing-function: ease-out;
-		}
-	</style>
+	<title>Angular Java</title>
 </head>
-<body data-ng-controller="appController">
+<body data-ng-controller="appController as app">
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 		<header class="mdl-layout__header">
 			<div class="mdl-layout__header-row">
-				<span class="mdl-layout-title">{{name}}</span>
+				<span class="mdl-layout-title">{{app.name}}</span>
 				<div class="mdl-layout-spacer"></div>
 				<nav class="mdl-navigation mdl-layout--large-screen-only">
-					<a href="" class="mdl-navigation__link">Cliente</a>
+					<a href="cliente" class="mdl-navigation__link">Cliente</a>
 					<a href="" class="mdl-navigation__link">Serviço</a>
-					<a href="" class="mdl-navigation__link">Chat<span class="mdl-badge" data-badge="{{quantidadeMensagemNotificacao}}"></span></a>
+					<a href="" class="mdl-navigation__link">Chat<span class="mdl-badge" data-badge="{{app.quantidadeMensagemNotificacao}}"></span></a>
 				</nav>
 			</div>
 		</header>
@@ -93,67 +39,11 @@
 				<a href="" class="mdl-navigation__link">Teste</a>
 			</nav>
 		</div>
-		<nav class="mdl-layout__content">
+		<section class="mdl-layout__content">
 			<div class="page-content">
-				<div class="mdl-card card-cliente mdl-shadow--2dp" data-ng-controller="listaController">
-					<div class="mdl-card__title">
-						<h2 class="mdl-card__title-text accent-color">Clientes</h2>
-					</div>
-					<div class="mdl-card__supporting-text card-table-lista">
-						<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp table-clientes">
-							<thead>
-								<tr class="table-head">
-									<th class="coluna-40">Nome</th>
-									<th class="coluna-20">Idade</th>
-									<th class="coluna-40">Email</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr data-ng-repeat="cliente in clientes" data-ng-dblclick="selecionarCliente(cliente)" class="jsn-mdl-no-transition"
-									data-ng-class="{'row-color': $index % 2 == 0}">
-									<td class="mdl-data-table__cell--non-numeric">{{cliente.nome}}</td>
-									<td class="mdl-data-table__cell--non-numeric">{{cliente.idade}}</td>
-									<td class="mdl-data-table__cell--non-numeric">{{cliente.email}}</td>
-									<td><a href="" data-ng-click="excluirCliente($index)"><i class="material-icons">clear</i></a></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>	
-					<div class="mdl-card__actions mdl-card--border">
-						<div class="formulario-cadastro">
-							<div class="mdl-grid">
-								<div class="mdl-cell mdl-cell--4-col  mdl-textfield">
-									<input id="clienteNome" type="text" class="mdl-textfield__input input-underline " data-ng-model="cliente.nome" placeholder="Nome"/>
-								</div>
-								<div class="mdl-cell mdl-cell--4-col  mdl-textfield">
-									<input id="clienteIdade" type="text" class="mdl-textfield__input" pattern="[0-9]{2,3}" data-ng-model="cliente.idade" placeholder="Idade"/>
-									<span class="mdl-textfield__error">Apenas números são permitidos</span>
-								</div>						
-								<div class="mdl-cell mdl-cell--4-col  mdl-textfield">
-									<input id="clienteEmail" type="email" class="mdl-textfield__input" data-ng-model="cliente.email" placeholder="E-mail"/>
-								</div>									
-							</div>
-							
-							<div class="panel-buttons-controller">
-								<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored jsn-mdl-no-transition" data-ng-click="adicionarCliente(cliente)"
-									data-ng-show="!cliente.id">
-									Salvar
-								</button>
-								<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored jsn-mdl-no-transition" data-ng-click="alterarCliente(cliente)"
-									data-ng-show="cliente.id">
-									Alterar
-								</button>
-								<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored jsn-mdl-no-transition" data-ng-click="cancelar()">
-									Cancelar
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				
+				<div data-ng-view />
 			</div>
-		</nav>
+		</section>
 	</div>
 </body>
 </html>
