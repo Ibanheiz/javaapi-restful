@@ -2,9 +2,9 @@
 
 angular
 	.module('appJava')
-	.controller('ClienteController', ClienteController);
+	.controller('ClienteController', ['$scope', '$http', ClienteController]);
 
-function ClienteController () {
+function ClienteController ($scope, $http) {
 	_buscarClientes($scope, $http);
 	
 	function criarPessoa(nome, sexo, idade, email) {

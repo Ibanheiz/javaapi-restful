@@ -11,24 +11,25 @@
 	<script src="src/lib/application.js" type="text/javascript"></script>
 	<script src="src/modules/cliente/controllers/persistencia.js" type="text/javascript"></script>
 	<link rel="stylesheet" href="src/resources/style.css"/>
+	<base href="/">
 	<meta name="viewport" content="width=device-width initial-scale=1.0" />
 	<title>Angular Java</title>
 </head>
-<body data-ng-controller="appController as app">
+<body>
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 		<header class="mdl-layout__header">
 			<div class="mdl-layout__header-row">
-				<span class="mdl-layout-title">{{app.name}}</span>
+				<span class="mdl-layout-title" data-ng-controller="AppController">{{name}}</span>
 				<div class="mdl-layout-spacer"></div>
 				<nav class="mdl-navigation mdl-layout--large-screen-only">
-					<a href="cliente" class="mdl-navigation__link">Cliente</a>
+					<a href="/java-angular/cliente" class="mdl-navigation__link">Cliente</a>
 					<a href="" class="mdl-navigation__link">Serviço</a>
-					<a href="" class="mdl-navigation__link">Chat<span class="mdl-badge" data-badge="{{app.quantidadeMensagemNotificacao}}"></span></a>
+					<a href="" class="mdl-navigation__link">Chat<span class="mdl-badge" data-badge="70"></span></a>
 				</nav>
 			</div>
 		</header>
 		<div class="mdl-layout__drawer">
-			<span class="mdl-layout-title">{{name}}</span>
+			<span class="mdl-layout-title">Angular</span>
 			<nav class="mdl-navigation">
 				<a href="" class="mdl-navigation__link">Teste</a>
 				<a href="" class="mdl-navigation__link">Teste</a>

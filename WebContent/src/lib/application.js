@@ -5,22 +5,21 @@ angular.module('appJava').controller('headController', function($scope){
 	$scope.titulo = "Angular com Java";
 });
 
-angular.module('appJava').controller('appController', AppController);
+angular.module('appJava').controller('AppController', ['$scope', AppController]);
 
-function AppController() {
-	var vm = this;
-	var quantidadeMensagemNotificacao = 75;
-	vm.name = "Angular Java";
-	vm.quantidadeMensagemNotificacao = quantidadeMensagemNotificacao;
+function AppController($scope) {
+	$scope.quantidadeMensagemNotificacao = 75;
+	$scope.name = "Angular Java";
 }
 
 
-angular.module('appJava').config(function($routeProvider) {
+angular.module('appJava').config(function($routeProvider, $locationProvider) {
 	$routeProvider
-		.when("/cliente", {
-			templateUrl: "src/template/cliente.html",
+		.when("/java-angular/cliente", {
+			templateUrl: "/java-angular/view/cliente",
 			controller: "ClienteController"
 		});
-		
+	
+	$locationProvider.html5Mode(true);
 	console.log("Passou pelo ng route");
 });
