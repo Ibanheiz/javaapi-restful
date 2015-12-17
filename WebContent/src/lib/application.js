@@ -16,7 +16,7 @@ function AppController($scope) {
 angular.module('appJava').config(function($routeProvider, $locationProvider) {
 	$routeProvider
 		.when("/java-angular/cliente", {
-			templateUrl: "/java-angular/view/cliente",
+			templateUrl: "/java-angular/views/cliente",
 			controller: "ClienteController"
 		});
 	
