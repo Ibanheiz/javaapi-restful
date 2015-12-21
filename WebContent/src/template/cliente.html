@@ -15,7 +15,7 @@
 			<tbody>
 				<tr data-ng-repeat="cliente in clientes" data-ng-dblclick="selecionarCliente(cliente)" class="jsn-mdl-no-transition"
 					data-ng-class="{'row-color': $index % 2 == 0}">
-					<td class="mdl-data-table__cell--non-numeric">{{cliente.nome}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{cliente.nome | name}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{cliente.idade}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{cliente.email}}</td>
 					<td><a href="" data-ng-click="excluirCliente($index)"><i class="material-icons">clear</i></a></td>

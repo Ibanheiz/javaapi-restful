@@ -19,7 +19,9 @@ function ClienteController ($scope, ClienteService) {
 	
 	$scope.adicionarCliente = function (cliente) {
 		if (cliente) {
-			ClienteService.save(cliente).then(function(response){
+			ClienteService.save(cliente).success(function(data){
+				console.log(data);
+				alert(data);
 				$scope.clientes.push(cliente);
 				delete $scope.cliente;
 			});
@@ -52,27 +54,27 @@ function ClienteController ($scope, ClienteService) {
 	};
 	
 	$scope.excluirCliente = function (index) {
-		_removerCliente(index, $scope, $http);
+		_removerCliente(index, $scope);
 	};
-}
-
-function _buscarClientes($scope, ClienteService) {
-	ClienteService.findAll().success(function (data) {
-		console.log(data.cliente);
-		$scope.clientes = data.cliente;
-	});
-}
-
-function _removerCliente(index, $scope) {
-	var cliente = $scope.clientes[index];
-	var promisse = ClienteService.remove(Cliente);
 	
-	promisse.success(function (data){
-		$scope.clientes.splice(index, 1);
-		delete $scope.cliente;
-	});
-	
-	promisse.error(function (err) {
-		console.log(err);
-	});
+	function _buscarClientes($scope, ClienteService) {
+		ClienteService.findAll().success(function (data) {
+			console.log(data.cliente);
+			$scope.clientes = data.cliente;
+		});
+	}
+
+	function _removerCliente(index, $scope) {
+		var cliente = $scope.clientes[index];
+		var promisse = ClienteService.remove(cliente);
+		
+		promisse.success(function (data){
+			$scope.clientes.splice(index, 1);
+			delete $scope.cliente;
+		});
+		
+		promisse.error(function (err) {
+			console.log(err);
+		});
+	}
 }

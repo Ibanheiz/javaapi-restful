@@ -11,7 +11,7 @@ function ClienteService($http) {
 	
 	this.update = function(cliente) {
 		return $http.put("http://localhost:8080/java-angular/api/clientes/" + cliente.id, cliente);
-	}
+	};
 	
 	this.remove = function(cliente) {
 		return $http.delete("http://localhost:8080/java-angular/api/clientes/" + cliente.id);
