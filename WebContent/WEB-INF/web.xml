@@ -18,10 +18,6 @@
     <url-pattern>/api/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>ng-view-serlvet</servlet-name>
-    <url-pattern>/views/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>default-route</servlet-name>
     <url-pattern>/teste</url-pattern>
   </servlet-mapping>

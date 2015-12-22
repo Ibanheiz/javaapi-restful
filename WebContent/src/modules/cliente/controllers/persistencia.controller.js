@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 angular
 	.module('appJava')
@@ -7,40 +7,17 @@ angular
 function ClienteController ($scope, ClienteService) {
 	_buscarClientes($scope, ClienteService);
 	
-	function criarPessoa(nome, sexo, idade, email) {
-		var cliente = {};
-		cliente.nome = nome;
-		cliente.sexo = sexo;
-		cliente.idade = idade;
-		cliente.email = email;
-		
-		return cliente;
-	}
-	
 	$scope.adicionarCliente = function (cliente) {
-		if (cliente) {
-			ClienteService.save(cliente).success(function(data){
-				$scope.clientes.push(data);
-				delete $scope.cliente;
-			});
-		}
+		ClienteService.save(cliente).success(function(data){
+			_buscarClientes($scope, ClienteService);
+			delete $scope.cliente;
+		});
 	};
 	
 	$scope.alterarCliente = function (cliente) {
-		if (cliente) {
-			ClienteService.update(cliente).then(function(response) {
-				var clientes = $scope.clientes;
-				
-				for (var index = 0; index < clientes.length; index++) {
-					if (clientes[index].id === cliente.id) {
-						console.log("index " + index + " tamnaho array" + clientes.length);
-						clientes[index] = cliente;
-						continue;
-					}
-				}
-				delete $scope.cliente;
-			});
-		}
+		ClienteService.update(cliente).then(function(response) {
+			_buscarClientes($scope, ClienteService);
+		});
 	};
 	
 	$scope.cancelar = function() {
@@ -57,8 +34,8 @@ function ClienteController ($scope, ClienteService) {
 	
 	function _buscarClientes($scope, ClienteService) {
 		ClienteService.findAll().success(function (data) {
-			console.log(data.cliente);
-			$scope.clientes = data.cliente;
+			$scope.clientes = [];
+			$scope.clientes = $scope.clientes.concat(data.cliente);
 		});
 	}
 

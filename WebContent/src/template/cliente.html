@@ -15,7 +15,7 @@
 			<tbody>
 				<tr data-ng-repeat="cliente in clientes" data-ng-dblclick="selecionarCliente(cliente)" class="jsn-mdl-no-transition"
 					data-ng-class="{'row-color': $index % 2 == 0}">
-					<td class="mdl-data-table__cell--non-numeric">{{cliente.nome | name}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{cliente.nome}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{cliente.idade}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{cliente.email}}</td>
 					<td><a href="" data-ng-click="excluirCliente($index)"><i class="material-icons">clear</i></a></td>
@@ -25,31 +25,74 @@
 	</div>	
 	<div class="mdl-card__actions mdl-card--border">
 		<div class="formulario-cadastro">
-			<div class="mdl-grid">
-				<div class="mdl-cell mdl-cell--4-col  mdl-textfield">
-					<input type="text" class="mdl-textfield__input input-underline " data-ng-model="cliente.nome" placeholder="Nome"/>
+			<form name="formCliente" novalidate>
+				<div class="mdl-grid">
+					<div class="mdl-cell mdl-cell--4-col  mdl-textfield">
+						<input	type="text" 
+								name="nome" 
+								class="mdl-textfield__input input-underline" 
+								data-ng-model="cliente.nome" 
+								placeholder="Nome"
+								minlength="3" 
+								maxlength="50"
+								required />
+						
+						<div data-ng-messages="formCliente.nome.$error" data-ng-if="formCliente.nome.$touched">
+    						<div data-ng-messages-include="/java-angular/partials/cliente"></div>
+						</div>
+					</div>
+					<div class="mdl-cell mdl-cell--4-col  mdl-textfield">
+						<input	type="number" 
+								name="idade"
+								class="mdl-textfield__input" 
+								pattern="[0-9]{2,3}" 
+								data-ng-model="cliente.idade" 
+								placeholder="Idade"
+								minlength="1" 
+								maxlength="3"
+								required />
+						
+						<div data-ng-messages="formCliente.idade.$error" data-ng-if="formCliente.idade.$touched">
+    						<div data-ng-messages-include="/java-angular/partials/cliente"></div>
+						</div>
+					</div>						
+					<div class="mdl-cell mdl-cell--4-col  mdl-textfield">
+						<input	type="email"
+								name="email"
+								class="mdl-textfield__input" 
+								data-ng-model="cliente.email" 
+								placeholder="E-mail"
+								minlength="3" 
+								maxlength="50"
+								required />
+						
+						<div data-ng-messages="formCliente.email.$error" data-ng-if="formCliente.email.$touched">
+    						<div data-ng-messages-include="/java-angular/partials/cliente"></div>
+						</div>
+					</div>									
 				</div>
-				<div class="mdl-cell mdl-cell--4-col  mdl-textfield">
-					<input type="text" class="mdl-textfield__input" pattern="[0-9]{2,3}" data-ng-model="cliente.idade" placeholder="Idade"/>
-				</div>						
-				<div class="mdl-cell mdl-cell--4-col  mdl-textfield">
-					<input type="email" class="mdl-textfield__input" data-ng-model="cliente.email" placeholder="E-mail"/>
-				</div>									
-			</div>
-			
-			<div class="panel-buttons-controller">
-				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored jsn-mdl-no-transition" data-ng-click="adicionarCliente(cliente)"
-					data-ng-show="!cliente.id">
-					Salvar
-				</button>
-				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored jsn-mdl-no-transition" data-ng-click="alterarCliente(cliente)"
-					data-ng-show="cliente.id">
-					Alterar
-				</button>
-				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored jsn-mdl-no-transition" data-ng-click="cancelar()">
-					Cancelar
-				</button>
-			</div>
+				
+				<div class="panel-buttons-controller">
+					<input	type="submit" 
+							value="Salvar" 
+						  	class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored jsn-mdl-no-transition" 
+						  	data-ng-disabled="formCliente.$invalid"
+						  	data-ng-click="adicionarCliente(cliente)"
+						  	data-ng-show="!cliente.id" />
+						
+					<input	type="submit"
+							value="Alterar" 
+							class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored jsn-mdl-no-transition" 
+						  	data-ng-disabled="formCliente.$invalid"
+							data-ng-click="alterarCliente(cliente)" 
+							data-ng-show="cliente.id" />
+						
+					<button	class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored jsn-mdl-no-transition" 
+							data-ng-click="cancelar()">
+							Cancelar
+					</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

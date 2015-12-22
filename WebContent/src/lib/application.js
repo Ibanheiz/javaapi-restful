@@ -1,5 +1,6 @@
-angular
-	.module('appJava', ['ngAnimate', 'ngRoute']);
+'use strict';
+
+angular.module('appJava', ['ngAnimate', 'ngRoute', 'ngMessages']);
 
 angular.module('appJava').controller('headController', function($scope){
 	$scope.titulo = "Angular com Java";
@@ -12,7 +13,6 @@ function AppController($scope) {
 	$scope.name = "Angular Java";
 }
 
-
 angular.module('appJava').config(function($routeProvider, $locationProvider) {
 	$routeProvider
 		.when("/java-angular/cliente", {
@@ -21,5 +21,4 @@ angular.module('appJava').config(function($routeProvider, $locationProvider) {
 		});
 	
 	$locationProvider.html5Mode(true);
-	console.log("Passou pelo ng route");
 });

@@ -1,3 +1,11 @@
+.input-validation-message {
+	color: #de3226;
+	position: absolute;
+	font-size: 12px;
+	margin-top: 3px;
+	display: block;
+}
+
 .accent-color {
 	color: #FF6E40;
 }

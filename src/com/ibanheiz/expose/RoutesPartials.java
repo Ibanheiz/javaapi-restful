@@ -13,16 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class AngularNgView
  */
-@WebServlet(name = "ng-view-serlvet")
-public class TemplateNgViewServlet extends HttpServlet {
+@WebServlet("/partials/*")
+public class RoutesPartials extends HttpServlet {
 	private static final long serialVersionUID = -3110933750855011394L;
 	private static final int NOT_FOUND = 404;
 	/**
      * @see HttpServlet#HttpServlet()
      */
-    public TemplateNgViewServlet() {
+    public RoutesPartials() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -30,11 +29,10 @@ public class TemplateNgViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getPathInfo().equals("/cliente")) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/src/template/cliente.html");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/src/template/partials/message-validation.html");
 			dispatcher.forward(request, response);
 		} else {
 			response.setStatus(NOT_FOUND);
 		}
-		
 	}
 }
