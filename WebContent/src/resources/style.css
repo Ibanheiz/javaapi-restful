@@ -1,0 +1,54 @@
+.accent-color {
+	color: #FF6E40;
+}
+
+.card-cliente {
+	width: 80%;
+	margin: 3% auto;
+}
+
+.table-clientes {
+	width: 100%;
+}
+
+.table-head th, .table-clientes tbody tr td {
+	text-align: left;
+}
+
+.panel-buttons-controller {
+	box-sizing: border-boxing;
+	padding: 8px;
+}
+
+.coluna-40 {
+	width: 40%;
+}
+
+.coluna-20 {
+	width: 20%;
+}
+
+.card-table-lista {
+	margin: 0 auto;
+}
+
+.mdl-data-table tbody tr:hover {
+	background-color: #AB8D83;
+}
+
+.row-color {
+	background-color: #EEE;
+}
+
+.jsn-mdl-no-transition {
+	transition: none !important;
+	transition-duration: none;
+}
+
+.mdl-textfield__input:focus {
+	border-bottom: 1px solid;
+	border-color: rgb(130, 90, 76);
+	outline: 0;
+	transition: border 300ms;
+	transition-timing-function: ease-out;
+}

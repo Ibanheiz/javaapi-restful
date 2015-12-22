@@ -9,7 +9,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
-@XmlType(name = "Cliente", propOrder = { "id", "razaoSocial", "nomeFantasia", "cnpj", "cpf" })
+@XmlType(name = "Cliente", propOrder = { "id", "nome", "genero", "idade", "email" })
 @XmlRootElement
 @Entity("clientes")
 public class Cliente implements Serializable {
@@ -17,79 +17,48 @@ public class Cliente implements Serializable {
 
 	@Id
 	private ObjectId id;
-	private String razaoSocial;
-	private String nomeFantasia;
-	private String cnpj;
-	private String cpf;
+	private String nome;
+	private String genero;
+	private String idade;
+	private String email;
 
-	/**
-	 * @return the id
-	 */
 	public String getId() {
 		return id.toString();
 	}
 
-	/**
-	 * @param id the id to set
-	 */
 	public void setId(String id) {
 		this.id = new ObjectId(id);
 	}
 
-	/**
-	 * @return the razaoSocial
-	 */
-	public String getRazaoSocial() {
-		return razaoSocial;
+	public String getNome() {
+		return nome;
 	}
 
-	/**
-	 * @param razaoSocial the razaoSocial to set
-	 */
-	public void setRazaoSocial(String razaoSocial) {
-		this.razaoSocial = razaoSocial;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	/**
-	 * @return the nomeFantasia
-	 */
-	public String getNomeFantasia() {
-		return nomeFantasia;
+	public String getGenero() {
+		return genero;
 	}
 
-	/**
-	 * @param nomeFantasia the nomeFantasia to set
-	 */
-	public void setNomeFantasia(String nomeFantasia) {
-		this.nomeFantasia = nomeFantasia;
+	public void setGenero(String genero) {
+		this.genero = genero;
 	}
 
-	/**
-	 * @return the cnpj
-	 */
-	public String getCnpj() {
-		return cnpj;
+	public String getIdade() {
+		return idade;
 	}
 
-	/**
-	 * @param cnpj the cnpj to set
-	 */
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
+	public void setIdade(String idade) {
+		this.idade = idade;
 	}
 
-	/**
-	 * @return the cpf
-	 */
-	public String getCpf() {
-		return cpf;
+	public String getEmail() {
+		return email;
 	}
 
-	/**
-	 * @param cpf the cpf to set
-	 */
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-
 }

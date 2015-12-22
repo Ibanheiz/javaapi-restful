@@ -23,7 +23,7 @@ public class ClienteDAO {
 	 * @param cliente
 	 */
 	public void salvar(Cliente cliente) {
-		logger.info("Salvando Cliente: " + cliente.getRazaoSocial());
+		logger.info("Salvando Cliente: " + cliente.getNome());
 		datastore.save(cliente);
 	}
 	
