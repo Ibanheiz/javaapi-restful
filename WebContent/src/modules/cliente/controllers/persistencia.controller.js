@@ -20,9 +20,7 @@ function ClienteController ($scope, ClienteService) {
 	$scope.adicionarCliente = function (cliente) {
 		if (cliente) {
 			ClienteService.save(cliente).success(function(data){
-				console.log(data);
-				alert(data);
-				$scope.clientes.push(cliente);
+				$scope.clientes.push(data);
 				delete $scope.cliente;
 			});
 		}

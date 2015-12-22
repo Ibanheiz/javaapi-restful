@@ -55,7 +55,7 @@ public class ClienteResource implements Serializable {
 	public Response cadastrar(Cliente cliente) {
 		logger.info("Consumindo Web Service de cadastro de Clientes");
 		clienteDAO.salvar(cliente);
-		return Response.ok().build();
+		return Response.ok(cliente, MediaType.APPLICATION_JSON).build();
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class ClienteResource implements Serializable {
 	public Response alterar(@PathParam("id") String id, Cliente cliente) {
 		logger.info("Consumindo o Web Service de alteração para o Cliente id: " + id);
 		clienteDAO.alterar(id, cliente);
-		return Response.ok().build();
+		return Response.ok(cliente, MediaType.APPLICATION_JSON).build();
 	}
 	
 	/**
